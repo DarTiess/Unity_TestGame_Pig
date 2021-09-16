@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Stone
+  - Bomb
   layers:
   - Default
   - TransparentFX
@@ -13,9 +15,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - PostProcessing
+  - Ground
+  - Stone
   - 
   - 
   - 
@@ -42,8 +44,17 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Ground
-    uniqueID: 2879543175
+    uniqueID: 2961446193
+    locked: 0
+  - name: Stone
+    uniqueID: 2158344331
     locked: 0
   - name: Player
-    uniqueID: 1369161073
+    uniqueID: 150046785
+    locked: 0
+  - name: Farmer
+    uniqueID: 3199786569
+    locked: 0
+  - name: Bomb
+    uniqueID: 2699142713
     locked: 0

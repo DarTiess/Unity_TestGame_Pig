@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance { get; private set; }
     public FixedJoystick Joystick;
  
     public float speed;
@@ -13,17 +14,27 @@ public class PlayerController : MonoBehaviour
     public Sprite spriteUp;
     public Sprite spriteDown;
     public SpriteRenderer spriteRenderer;
-    
+    bool canMove=true;
+    Vector2 startPosition;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
-       
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        Move();
+        if (canMove)
+        {
+            Move();
+        }
+       
     }
     void Move()
     {
@@ -31,23 +42,8 @@ public class PlayerController : MonoBehaviour
 
         float moveForward = Joystick.inputVector.x;
         float moveUp = Joystick.inputVector.y;
-        Debug.Log(moveUp);
-        if (moveForward != 0)
-        {
-            spriteRenderer.sprite = spriteForward;
-            transform.Translate(Vector3.right * moveForward * speed * Time.deltaTime);
-            if (moveForward > 0 && !isTurnRight)
-            {
-                TurnRight();
-
-            }
-            else if (moveForward < 0 && isTurnRight)
-            {
-
-                TurnRight();
-
-            }
-        }
+       
+       
        if (moveUp >= 0.9f || moveUp <= -0.9f)
         {
            // spriteRenderer.sprite = spriteUp;
@@ -62,6 +58,24 @@ public class PlayerController : MonoBehaviour
 
                 spriteRenderer.sprite = spriteDown;
 
+            }
+        }else
+        {
+            if (moveForward != 0)
+            {
+                spriteRenderer.sprite = spriteForward;
+                transform.Translate(Vector3.right * moveForward * speed * Time.deltaTime);
+                if (moveForward > 0 && !isTurnRight)
+                {
+                    TurnRight();
+
+                }
+                else if (moveForward < 0 && isTurnRight)
+                {
+
+                    TurnRight();
+
+                }
             }
         }
        
@@ -86,4 +100,29 @@ public class PlayerController : MonoBehaviour
         theScale.y *= -1;
         transform.localScale = theScale;
     }
+     public void DeathPig()
+    {
+        canMove = false;
+        spriteRenderer.sprite = spriteForward;
+        transform.rotation = Quaternion.Euler(0, 0, -90f);
+        StartCoroutine(FailedGame());
+       
+    }
+
+    IEnumerator FailedGame()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.FailGame();
+    }
+ 
+    public void RestartPiggie()
+    {
+        canMove = true;
+        spriteRenderer.sprite = spriteForward;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.position = startPosition;
+    }
+   
+
+   
 }
