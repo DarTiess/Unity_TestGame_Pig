@@ -647,6 +647,7 @@ GameObject:
   - component: {fileID: 210216005}
   - component: {fileID: 210216004}
   - component: {fileID: 210216007}
+  - component: {fileID: 210216008}
   m_Layer: 0
   m_Name: farmer_0
   m_TagString: Untagged
@@ -679,6 +680,10 @@ MonoBehaviour:
   spriteLeft: {fileID: -9215070241222095863, guid: 77ea3edc0b0b7244bba249dc67cfdec0,
     type: 3}
   spriteRight: {fileID: -284627385986098231, guid: 77ea3edc0b0b7244bba249dc67cfdec0,
+    type: 3}
+  angrySpriteLeft: {fileID: -6113192314060189953, guid: 14b407c9a39d53642821c0e801f98129,
+    type: 3}
+  angrySpriteRight: {fileID: 9093268807262632672, guid: 14b407c9a39d53642821c0e801f98129,
     type: 3}
   spriteRenderer: {fileID: 210216005}
   bobmPref: {fileID: 1576023161136408266, guid: 9460bddec8e5a864784fca6f298d91d5,
@@ -760,12 +765,33 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 2.3, y: 8.34}
   m_Direction: 0
+--- !u!50 &210216008
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210216003}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!4 &213960250 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2692486927893858732, guid: d4ffaab4f5fc9374aa6ffd8f3fcc8431,

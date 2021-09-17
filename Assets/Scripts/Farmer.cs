@@ -20,7 +20,8 @@ public class Farmer : MonoBehaviour
     public Sprite spriteUp;
     public Sprite spriteLeft;
     public Sprite spriteRight;
-  
+    public Sprite angrySpriteLeft;
+    public Sprite angrySpriteRight;
     public SpriteRenderer spriteRenderer;
     public GameObject bobmPref;
     public GameObject applePref;
@@ -71,6 +72,39 @@ public class Farmer : MonoBehaviour
         spriteRenderer.sprite = spriteUp;
     }
 
-   
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+
+            mySequence.Kill();
+           if(collision.gameObject.transform.position.x< gameObject.transform.position.x)
+            {
+                spriteRenderer.sprite = angrySpriteLeft;
+            }
+            else
+            {
+                spriteRenderer.sprite = angrySpriteRight;
+            }
+            collision.gameObject.GetComponent<PlayerController>().DeathPig();
+            StartCoroutine(AngryFarmer());
+        }
+    }
+
+
+    IEnumerator AngryFarmer()
+    {
+        yield return new WaitForSeconds(1f);
+        spriteRenderer.sprite = spriteDown;
+        transform.position = waypoints[0];
+        mySequence = DOTween.Sequence();
+        mySequence.Append(transform.DOMove(waypoints[0], speed).OnComplete(ReturnDown));
+        mySequence.Append(transform.DOMove(waypoints[1], speed).OnComplete(ReturnLeft));
+        mySequence.Append(transform.DOMove(waypoints[2], speed).OnComplete(ReturnUp));
+        mySequence.Append(transform.DOMove(waypoints[3], speed).OnComplete(ReturnRight));
+        mySequence.SetLoops(-1);
+    }
+
 
 }
