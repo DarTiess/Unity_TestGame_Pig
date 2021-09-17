@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Stone
   - Bomb
+  - Dog
+  - Apple
   layers:
   - Default
   - TransparentFX

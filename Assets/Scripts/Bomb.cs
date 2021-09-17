@@ -28,8 +28,6 @@ public class Bomb : MonoBehaviour
             explosionEffect.Play();
             spriteRenderer.enabled = false;
             gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
-           
-            // StartCoroutine(DeleteObject());
         }
     }
 

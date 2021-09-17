@@ -20,14 +20,15 @@ public class Farmer : MonoBehaviour
     public Sprite spriteUp;
     public Sprite spriteLeft;
     public Sprite spriteRight;
-    public Sprite dirtSprite;
+  
     public SpriteRenderer spriteRenderer;
     public GameObject bobmPref;
-   
+    public GameObject applePref;
+    Sequence mySequence;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Sequence mySequence = DOTween.Sequence();
+       mySequence = DOTween.Sequence();
         mySequence.Append(transform.DOMove(waypoints[0], speed).OnComplete(ReturnDown));
         mySequence.Append(transform.DOMove(waypoints[1], speed).OnComplete(ReturnLeft));
         mySequence.Append(transform.DOMove(waypoints[2], speed).OnComplete(ReturnUp));
@@ -35,18 +36,24 @@ public class Farmer : MonoBehaviour
         mySequence.SetLoops(-1);
 
         InvokeRepeating("MakeBomb", 1f, 1.6f);
+        InvokeRepeating("MakeApple", 1.5f, 1.9f);
     }
 
     // Update is called once per frame
     void Update()
     {
-      
 
+     
 
     }
+
+  
     void MakeBomb()
     {
         Instantiate(bobmPref, transform.position, bobmPref.transform.rotation);
+    }void MakeApple()
+    {
+        Instantiate(applePref, transform.position, applePref.transform.rotation);
     }
     void ReturnDown()
     {
@@ -65,4 +72,5 @@ public class Farmer : MonoBehaviour
     }
 
    
+
 }

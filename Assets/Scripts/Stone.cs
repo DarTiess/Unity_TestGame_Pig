@@ -27,11 +27,12 @@ public class Stone : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             int rnd = Random.Range(0, 4);
-            Debug.Log("trigger stone");
-            collision.gameObject.transform.position -= new Vector3(0.8f, 0f, 0f);
+          
+          //  collision.gameObject.transform.position -= new Vector3(0.8f, 0f, 0f);
             explosionEffect.Play();
-          //  spriteRenderer.enabled = false;
-         //   gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            //  spriteRenderer.enabled = false;
+            gameObject.transform.rotation = Quaternion.Euler(0f, 0, 90f);
+           gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
          //  ChooseInside(rnd);
            
         }

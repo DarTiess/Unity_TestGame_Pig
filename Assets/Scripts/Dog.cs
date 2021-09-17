@@ -32,7 +32,8 @@ public class Dog : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bomb"))
         {
@@ -43,7 +44,20 @@ public class Dog : MonoBehaviour
             StartCoroutine(AngryDog());
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+           
+            mySequence.Kill();
+            explosionEffect.Play();
+            spriteRenderer.sprite = angrySprite;
+            collision.gameObject.GetComponent<PlayerController>().DeathPig();
+        }
+    }
 
+    
     IEnumerator AngryDog()
     {
         yield return new WaitForSeconds(1f);
